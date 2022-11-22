@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/main_page"
+        android:enabled="true"
+        android:icon="@drawable/ic_explorer"
+        android:title=""/>
+    <item
+        android:id="@+id/my_cart"
+        android:enabled="true"
+        android:icon="@drawable/ic_my_cart"
+        android:title="" />
+
+    <item
+        android:id="@+id/favourite"
+        android:enabled="true"
+        android:icon="@drawable/ic_heart_outlined"
+        android:title="" />
+
+    <item
+        android:id="@+id/account"
+        android:enabled="true"
+        android:icon="@drawable/ic_account"
+        android:title="" />
+
+
+</menu>

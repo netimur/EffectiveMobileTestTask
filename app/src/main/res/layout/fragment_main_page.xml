@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F8F8"
+    tools:context=".ui.mainpage.MainPageFragment">
+
+    <ScrollView
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        android:layout_height="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/geolocation_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/ic_outline_location_on_24"
+                app:layout_constraintEnd_toStartOf="@id/current_city"
+                app:layout_constraintTop_toTopOf="@id/current_city" />
+
+            <TextView
+                android:id="@+id/current_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/frame_margin"
+                android:text="Zihuatanejo, Gro"
+                android:textAppearance="@style/TopTextTextAppearance"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/dropdown_menu_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                app:layout_constraintStart_toEndOf="@id/current_city"
+                app:layout_constraintTop_toTopOf="@id/current_city" />
+
+            <ImageView
+                android:id="@+id/filter_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/frame_margin"
+                android:src="@drawable/ic_outline_filter_alt_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/current_city" />
+
+            <TextView
+                android:id="@+id/select_category_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/frame_margin"
+                android:layout_marginTop="30dp"
+                android:text="@string/select_category"
+                android:textAppearance="@style/TextAppearance.EffectiveMobileTestTask.Headline1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/current_city" />
+
+            <TextView
+                android:id="@+id/view_all_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/frame_margin"
+                android:text="@string/view_all"
+                android:textAppearance="@style/ExpandContentButtonTextAppearance"
+                app:layout_constraintBottom_toBottomOf="@id/select_category_label"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/select_category_label" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/category_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/frame_margin"
+                android:layout_marginTop="@dimen/frame_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/select_category_label"
+                tools:itemCount="1"
+                tools:listitem="@layout/category_item" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/search_edit_text_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="@dimen/frame_margin"
+                android:layout_marginStart="@dimen/frame_margin"
+                android:layout_marginTop="@dimen/frame_margin"
+                android:layout_marginEnd="80dp"
+                android:hint="@string/search"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/white"
+                app:boxStrokeWidth="0dp"
+                app:hintTextAppearance="@style/TextAppearance.EffectiveMobileTestTask.Headline6"
+                app:hintTextColor="@android:color/transparent"
+                app:layout_constraintEnd_toStartOf="@id/use_qr_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/category_recyclerview"
+                app:shapeAppearance="@style/ShapeAppearance.EffectiveMobileTestTask.SmallComponent"
+                app:startIconDrawable="@drawable/ic_baseline_search_24"
+                app:startIconTint="@color/orange_brand">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.EffectiveMobileTestTask.Headline6"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/use_qr_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/frame_margin"
+                app:backgroundTint="@color/orange_brand"
+                app:borderWidth="0dp"
+                app:elevation="0dp"
+                app:fabCustomSize="45dp"
+                app:layout_constraintBottom_toBottomOf="@id/search_edit_text_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/search_edit_text_layout"
+                app:srcCompat="@drawable/ic_baseline_qr_code_24"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/hot_sales_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/frame_margin"
+                android:layout_marginTop="@dimen/frame_margin"
+                android:text="@string/hot_sales"
+                android:textAppearance="@style/TextAppearance.EffectiveMobileTestTask.Headline1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/use_qr_button" />
+
+            <TextView
+                android:id="@+id/see_more_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/frame_margin"
+                android:text="@string/see_more"
+                android:textAppearance="@style/ExpandContentButtonTextAppearance"
+                app:layout_constraintBottom_toBottomOf="@id/hot_sales_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/hot_sales_label" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/hot_sales_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hot_sales_label" />
+
+            <TextView
+                android:id="@+id/best_seller_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/frame_margin"
+                android:layout_marginTop="10dp"
+                android:text="Best Seller"
+                android:textAppearance="@style/TextAppearance.EffectiveMobileTestTask.Headline1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hot_sales_viewpager" />
+
+            <TextView
+                android:id="@+id/see_more_button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/frame_margin"
+                android:text="@string/see_more"
+                android:textAppearance="@style/ExpandContentButtonTextAppearance"
+                app:layout_constraintBottom_toBottomOf="@id/best_seller_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/best_seller_label" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/best_sellers_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+
+                app:layout_constraintTop_toBottomOf="@id/best_seller_label"
+                tools:itemCount="2"
+                tools:listitem="@layout/best_seller_card" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_navigation_bg"
+        app:itemIconTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation_menu" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
