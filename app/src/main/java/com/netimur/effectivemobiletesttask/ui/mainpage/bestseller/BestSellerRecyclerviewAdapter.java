@@ -2,6 +2,7 @@ package com.netimur.effectivemobiletesttask.ui.mainpage.bestseller;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -16,7 +17,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BestSellerRecyclerviewAdapter extends RecyclerView.Adapter<BestSellerRecyclerviewAdapter.BestSellerViewHolder> {
+final public class BestSellerRecyclerviewAdapter extends RecyclerView.Adapter<BestSellerRecyclerviewAdapter.BestSellerViewHolder> {
     private final Context context;
     private List<BestSeller> bestSellers = new ArrayList<>();
 
@@ -48,6 +49,7 @@ public class BestSellerRecyclerviewAdapter extends RecyclerView.Adapter<BestSell
 
     class BestSellerViewHolder extends RecyclerView.ViewHolder {
         private BestSellerCardBinding binding;
+        private boolean isFavoriteButtonSelected;
 
         public BestSellerViewHolder(BestSellerCardBinding binding) {
             super(binding.getRoot());
@@ -63,6 +65,19 @@ public class BestSellerRecyclerviewAdapter extends RecyclerView.Adapter<BestSell
             if (bestSeller.isFavorites()) {
                 binding.isFavoriteTag.setImageResource(R.drawable.ic_heart_filled);
             }
+            isFavoriteButtonSelected = bestSeller.isFavorites();
+            binding.isFavoriteTag.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!isFavoriteButtonSelected) {
+                        isFavoriteButtonSelected = true;
+                        binding.isFavoriteTag.setImageResource(R.drawable.ic_heart_filled);
+                    } else {
+                        isFavoriteButtonSelected = false;
+                        binding.isFavoriteTag.setImageResource(R.drawable.ic_heart_outlined);
+                    }
+                }
+            });
         }
     }
 }

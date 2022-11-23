@@ -7,6 +7,7 @@
     tools:context=".ui.mainpage.hotsales.HotSalesPageFragment">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/hot_sales_card"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:layout_marginHorizontal="@dimen/frame_margin"
@@ -23,10 +24,9 @@
 
             <ImageView
                 android:id="@+id/imageview"
-                android:layout_height="match_parent"
                 android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/title"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -74,8 +74,9 @@
                 android:layout_marginBottom="@dimen/frame_margin"
                 android:fontFamily="@font/sfprodisplaybold"
                 android:letterSpacing="0"
-                android:paddingHorizontal="50dp"
+                android:paddingHorizontal="30dp"
                 android:text="@string/buy_now"
+                android:textSize="12sp"
                 android:textAllCaps="false"
                 android:textColor="#010035"
                 app:backgroundTint="#FFFFFF"

@@ -9,7 +9,8 @@ final public class DetailsResponseBody {
     private final String cpu;
     private final String camera;
     private final List<String> capacity;
-    private final List<String> color;
+    @SerializedName("color")
+    private final List<String> colors;
     private final String id;
     @SerializedName("images")
     private final List<String> pictureUrls;
@@ -20,11 +21,11 @@ final public class DetailsResponseBody {
     private final String ssd;
     private final String title;
 
-    public DetailsResponseBody(String cpu, String camera, List<String> capacity, List<String> color, String id, List<String> pictureUrls, boolean isFavorites, int price, double rating, String sd, String ssd, String title) {
+    public DetailsResponseBody(String cpu, String camera, List<String> capacity, List<String> colors, String id, List<String> pictureUrls, boolean isFavorites, int price, double rating, String sd, String ssd, String title) {
         this.cpu = cpu;
         this.camera = camera;
         this.capacity = capacity;
-        this.color = color;
+        this.colors = colors;
         this.id = id;
         this.pictureUrls = pictureUrls;
         this.isFavorites = isFavorites;
@@ -47,8 +48,8 @@ final public class DetailsResponseBody {
         return capacity;
     }
 
-    public List<String> getColor() {
-        return color;
+    public List<String> getColors() {
+        return colors;
     }
 
     public String getId() {

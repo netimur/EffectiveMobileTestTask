@@ -195,7 +195,7 @@
                 android:id="@+id/ram_image"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:src="@drawable/ic_baseline_check_24"
+                android:src="@drawable/ic_ram"
                 app:layout_constraintEnd_toStartOf="@id/rom_image"
                 app:layout_constraintStart_toEndOf="@id/camera_image"
                 app:layout_constraintTop_toTopOf="@id/processor_image" />
@@ -205,7 +205,7 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:layout_marginEnd="@dimen/frame_margin"
-                android:src="@drawable/ic_baseline_check_24"
+                android:src="@drawable/ic_rom"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/processor_image" />
 
@@ -269,14 +269,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/frame_margin"
-                app:layout_constraintEnd_toStartOf="@id/memory_recyclerview"
+                app:layout_constraintEnd_toStartOf="@id/capacity_recyclerview"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/select_setting_label"
                 tools:itemCount="1"
                 tools:listitem="@layout/color_item" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/memory_recyclerview"
+                android:id="@+id/capacity_recyclerview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -286,6 +286,7 @@
                 tools:listitem="@layout/capacity_item" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_to_cart_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/frame_margin"

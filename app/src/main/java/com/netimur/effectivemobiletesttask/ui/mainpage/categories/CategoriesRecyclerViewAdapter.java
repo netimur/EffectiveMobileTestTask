@@ -34,19 +34,16 @@ public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<Categori
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
         Category category = categories.get(position);
-        View.OnClickListener onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (currentHolder != null && currentHolder != holder) {
-                    holder.selectHolder();
-                    currentHolder.unselectHolder();
-                    currentHolder = holder;
-                } else {
-                    currentHolder = holder;
-                    currentHolder.selectHolder();
-                }
-
+        View.OnClickListener onClickListener = v -> {
+            if (currentHolder != null && currentHolder != holder) {
+                holder.selectHolder();
+                currentHolder.unselectHolder();
+                currentHolder = holder;
+            } else {
+                currentHolder = holder;
+                currentHolder.selectHolder();
             }
+
         };
         holder.bindData(category, onClickListener);
         holders.add(holder);

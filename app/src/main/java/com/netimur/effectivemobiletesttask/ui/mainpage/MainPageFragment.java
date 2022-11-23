@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainPageFragment extends Fragment implements MainPageView {
+final public class MainPageFragment extends Fragment implements MainPageView {
     private FragmentMainPageBinding binding;
     private MainPagePresenter mainPagePresenter;
 

@@ -6,7 +6,7 @@ import com.netimur.effectivemobiletesttask.data.model.MainPageResponseBody;
 import com.netimur.effectivemobiletesttask.data.network.ApplicationResponseCallback;
 import com.netimur.effectivemobiletesttask.utils.AbstractPresenter;
 
-public class MainPagePresenterImplementation extends AbstractPresenter implements MainPagePresenter, ApplicationResponseCallback {
+final public class MainPagePresenterImplementation extends AbstractPresenter implements MainPagePresenter, ApplicationResponseCallback {
     private final MainPageView view;
 
     public MainPagePresenterImplementation(MainPageView view) {

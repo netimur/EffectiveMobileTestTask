@@ -33,18 +33,13 @@ final public class HotSalesPageFragment extends Fragment {
         this.hotSales = args.getParcelable(ARG_OBJECT);
         binding.title.setText(hotSales.getTitle());
         binding.subtitle.setText(hotSales.getSubtitle());
-        if(!hotSales.isNew()) {
+        if (!hotSales.isNew()) {
             binding.newTag.setVisibility(View.INVISIBLE);
         }
         ImageView imageView = binding.imageview;
-        Picasso.get().load(hotSales.getPictureUrl()).into(imageView);
+        Picasso.get().load(hotSales.getPictureUrl()).resize(1000, binding.hotSalesCard.getHeight()).into(imageView);
         Log.d(this.getClass().toString(), this.hotSales.toString());
-        binding.getRoot().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_mainPageFragment_to_productDetailsFragment);
-            }
-        });
+        binding.getRoot().setOnClickListener(v -> Navigation.findNavController(binding.getRoot()).navigate(R.id.action_mainPageFragment_to_productDetailsFragment));
         return view;
     }
 
