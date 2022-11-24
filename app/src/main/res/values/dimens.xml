@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="frame_margin">20dp</dimen>
+    <dimen name="enlarge_photo_width">266dp</dimen>
+    <dimen name="enlarge_photo_height">335dp</dimen>
+    <dimen name="small_photo_width">200dp</dimen>
+    <dimen name="small_photo_height">280dp</dimen>
+    <dimen name="large_margin">40dp</dimen>
 </resources>

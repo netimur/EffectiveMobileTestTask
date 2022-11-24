@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_mainPageFragment_to_productDetailsFragment"
             app:destination="@id/productDetailsFragment" />
+        <action
+            android:id="@+id/action_mainPageFragment_to_myCartFragment"
+            app:destination="@id/myCartFragment" />
     </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
@@ -24,12 +27,12 @@
             app:destination="@id/mainPageFragment" />
     </fragment>
     <fragment
-        android:id="@+id/hotSalesPageFragment"
-        android:name="com.netimur.effectivemobiletesttask.ui.mainpage.hotsales.HotSalesPageFragment"
-        android:label="fragment_hot_sales_page"
-        tools:layout="@layout/fragment_hot_sales_page" >
+        android:id="@+id/myCartFragment"
+        android:name="com.netimur.effectivemobiletesttask.ui.mycart.MyCartFragment"
+        android:label="fragment_my_cart"
+        tools:layout="@layout/fragment_my_cart" >
         <action
-            android:id="@+id/action_hotSalesPageFragment_to_productDetailsFragment"
-            app:destination="@id/productDetailsFragment" />
+            android:id="@+id/action_myCartFragment_to_mainPageFragment"
+            app:destination="@id/mainPageFragment" />
     </fragment>
 </navigation>

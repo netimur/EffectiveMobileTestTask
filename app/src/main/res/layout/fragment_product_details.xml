@@ -10,11 +10,11 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/back_button"
-        android:layout_width="wrap_content"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
+        app:fabSize="mini"
         android:layout_marginStart="@dimen/frame_margin"
         app:backgroundTint="@color/dark_blue_brand"
-        app:fabCustomSize="37dp"
         app:layout_constraintBottom_toBottomOf="@id/product_details_label"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/product_details_label"
@@ -36,11 +36,11 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/my_cart_button"
-        android:layout_width="wrap_content"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/frame_margin"
         app:backgroundTint="@color/orange_brand"
-        app:fabCustomSize="37dp"
+        app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="@id/product_details_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/product_details_label"
@@ -48,6 +48,71 @@
         app:srcCompat="@drawable/ic_my_cart"
 
         app:tint="@color/white" />
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/motion_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/frame_margin"
+        app:layoutDescription="@xml/fragment_product_details_scene"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toTopOf="@id/product_info_card"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/product_details_label">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="@dimen/enlarge_photo_width"
+            android:layout_height="@dimen/enlarge_photo_height"
+            android:layout_margin="@dimen/frame_margin"
+            app:cardCornerRadius="@dimen/frame_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="@dimen/small_photo_width"
+            android:layout_height="@dimen/small_photo_height"
+            android:layout_margin="@dimen/frame_margin"
+            app:cardCornerRadius="@dimen/frame_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageView1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="@dimen/small_photo_width"
+            android:layout_height="@dimen/small_photo_height"
+            android:layout_margin="@dimen/frame_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageView2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="@dimen/small_photo_width"
+            android:layout_height="@dimen/small_photo_height"
+            android:layout_margin="@dimen/frame_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/imageView1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.helper.widget.Carousel
+            android:id="@+id/carousel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:carousel_backwardTransition="@+id/backward"
+            app:carousel_emptyViewsBehavior="gone"
+            app:carousel_firstView="@id/imageView2"
+            app:carousel_forwardTransition="@+id/forward"
+            app:carousel_infinite="true"
+            app:carousel_nextState="@+id/next"
+            app:carousel_previousState="@+id/previous"
+            app:constraint_referenced_ids="imageView1, imageView2, imageView3, imageView4" />
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/photo_viewpager"
@@ -58,6 +123,7 @@
         app:layout_constraintTop_toBottomOf="@id/product_details_label" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/product_info_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -269,18 +335,25 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/frame_margin"
-                app:layout_constraintEnd_toStartOf="@id/capacity_recyclerview"
+                app:layout_constraintEnd_toStartOf="@id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/select_setting_label"
                 tools:itemCount="1"
                 tools:listitem="@layout/color_item" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="120dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/capacity_recyclerview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/color_recyclerview"
+                app:layout_constraintStart_toEndOf="@id/guideline"
                 app:layout_constraintTop_toTopOf="@id/color_recyclerview"
                 tools:itemCount="1"
                 tools:listitem="@layout/capacity_item" />

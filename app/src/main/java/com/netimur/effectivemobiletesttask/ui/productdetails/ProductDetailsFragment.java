@@ -3,19 +3,20 @@ package com.netimur.effectivemobiletesttask.ui.productdetails;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.netimur.effectivemobiletesttask.data.model.DetailsResponseBody;
 import com.netimur.effectivemobiletesttask.databinding.FragmentProductDetailsBinding;
-import com.netimur.effectivemobiletesttask.ui.productdetails.productphoto.ProductPhotoViewPagerAdapter;
-import com.netimur.effectivemobiletesttask.ui.productdetails.productsetting.CapacityRecyclerViewAdapter;
-import com.netimur.effectivemobiletesttask.ui.productdetails.productsetting.ColorRecyclerViewAdapter;
+import com.netimur.effectivemobiletesttask.ui.productdetails.productphoto.ProductPhotoCarouselAdapter;
+import com.netimur.effectivemobiletesttask.ui.productdetails.productsetting.capacity.CapacityRecyclerViewAdapter;
+import com.netimur.effectivemobiletesttask.ui.productdetails.productsetting.color.ColorRecyclerViewAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 final public class ProductDetailsFragment extends Fragment implements ProductDetailsView {
@@ -34,15 +35,16 @@ final public class ProductDetailsFragment extends Fragment implements ProductDet
 
     @Override
     public void showProductDetails(DetailsResponseBody detailsResponseBody) {
+        binding.backButton.setOnClickListener(v -> Navigation.findNavController(binding.getRoot()).navigateUp());
         List<String> urls = detailsResponseBody.getPictureUrls();
-        ProductPhotoViewPagerAdapter viewPagerAdapter = new ProductPhotoViewPagerAdapter(this.getActivity(), urls);
-        binding.photoViewpager.setAdapter(viewPagerAdapter);
+        ProductPhotoCarouselAdapter carouselAdapter = new ProductPhotoCarouselAdapter(urls);
+        binding.carousel.setAdapter(carouselAdapter);
+        binding.carousel.refresh();
         binding.cameraDescription.setText(detailsResponseBody.getCamera());
         binding.ramDescription.setText(detailsResponseBody.getSsd());
         binding.romDescription.setText(detailsResponseBody.getSd());
         binding.processorDescription.setText(detailsResponseBody.getCpu());
         ColorRecyclerViewAdapter colorRecyclerViewAdapter = new ColorRecyclerViewAdapter(this.getContext());
-        Log.d("DEBUG", detailsResponseBody.getColors().toString());
         colorRecyclerViewAdapter.setColors(detailsResponseBody.getColors());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         binding.colorRecyclerview.setLayoutManager(linearLayoutManager);

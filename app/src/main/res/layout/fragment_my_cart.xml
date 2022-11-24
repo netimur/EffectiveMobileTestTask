@@ -59,7 +59,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="600dp"
         app:cardBackgroundColor="@color/dark_blue_brand"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,9 +74,19 @@
                 android:id="@+id/my_cart_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/frame_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="2"
+                tools:listitem="@layout/my_cart_card" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="230dp" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/top_divider"
@@ -84,20 +94,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/frame_margin"
                 app:dividerColor="@color/white"
-                app:layout_constraintBottom_toTopOf="@id/checkout_button"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guideline" />
 
             <TextView
                 android:id="@+id/total_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/frame_margin"
-                android:layout_marginBottom="@dimen/frame_margin"
+                android:layout_marginHorizontal="@dimen/large_margin"
+                android:layout_marginTop="@dimen/frame_margin"
                 android:text="@string/total"
                 android:textAppearance="@style/MyCartTextAppearance"
-                app:layout_constraintBottom_toTopOf="@id/delivery_label"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/top_divider" />
 
             <TextView
                 android:id="@+id/delivery_label"
@@ -106,23 +116,47 @@
                 android:layout_marginTop="@dimen/frame_margin"
                 android:text="@string/delivery"
                 android:textAppearance="@style/MyCartTextAppearance"
-                app:layout_constraintBottom_toTopOf="@id/bottom_divider"
-                app:layout_constraintStart_toStartOf="@id/total_label" />
+                app:layout_constraintStart_toStartOf="@id/total_label"
+                app:layout_constraintTop_toBottomOf="@id/total_label" />
+
+            <TextView
+                android:id="@+id/total_cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/large_margin"
+                android:fontFamily="@font/markpro_bold"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/total_label"
+                tools:text="$6,000 us" />
+
+            <TextView
+                android:id="@+id/delivery_cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/markpro_bold"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@id/total_cost"
+                app:layout_constraintTop_toTopOf="@id/delivery_label"
+                tools:text="Free" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/bottom_divider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@id/checkout_button"
+                android:layout_marginTop="@dimen/frame_margin"
+                app:dividerColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/delivery_label" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/checkout_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/frame_margin"
+                android:layout_marginHorizontal="@dimen/large_margin"
                 android:layout_marginBottom="@dimen/frame_margin"
                 android:paddingVertical="10dp"
                 android:text="@string/checkout"

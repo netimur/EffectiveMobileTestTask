@@ -4,6 +4,9 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -14,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.netimur.effectivemobiletesttask.R;
 import com.netimur.effectivemobiletesttask.data.CategoryRepository;
@@ -44,13 +48,11 @@ final public class MainPageFragment extends Fragment implements MainPageView {
         configBestSellerRecyclerView();
         configCategoriesRecyclerView();
         showCategories(null);
-        binding.filterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FilterBottomSheetDialog filter = new FilterBottomSheetDialog();
-                filter.show(getParentFragmentManager(), "TAG");
-            }
+        binding.filterButton.setOnClickListener(v -> {
+            FilterBottomSheetDialog filter = new FilterBottomSheetDialog();
+            filter.show(getParentFragmentManager(), "TAG");
         });
+
         return view;
     }
 
