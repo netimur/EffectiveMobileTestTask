@@ -63,7 +63,7 @@ final public class BestSellerRecyclerviewAdapter extends RecyclerView.Adapter<Be
             binding.oldPrice.setText(String.valueOf(bestSeller.getPriceWithoutDiscount()));
             binding.productName.setText(bestSeller.getTitle());
             if (bestSeller.isFavorites()) {
-                binding.isFavoriteTag.setImageResource(R.drawable.ic_heart_filled);
+                binding.isFavoriteTag.setImageResource(R.drawable.ic_baseline_favorite_24);
             }
             isFavoriteButtonSelected = bestSeller.isFavorites();
             binding.isFavoriteTag.setOnClickListener(new View.OnClickListener() {
@@ -71,10 +71,10 @@ final public class BestSellerRecyclerviewAdapter extends RecyclerView.Adapter<Be
                 public void onClick(View v) {
                     if (!isFavoriteButtonSelected) {
                         isFavoriteButtonSelected = true;
-                        binding.isFavoriteTag.setImageResource(R.drawable.ic_heart_filled);
+                        binding.isFavoriteTag.setImageResource(R.drawable.ic_baseline_favorite_24);
                     } else {
                         isFavoriteButtonSelected = false;
-                        binding.isFavoriteTag.setImageResource(R.drawable.ic_heart_outlined);
+                        binding.isFavoriteTag.setImageResource(R.drawable.ic_outline_favorite_border_24);
                     }
                 }
             });

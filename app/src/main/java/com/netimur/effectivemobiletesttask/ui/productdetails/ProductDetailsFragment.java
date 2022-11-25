@@ -10,6 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.netimur.effectivemobiletesttask.R;
 import com.netimur.effectivemobiletesttask.data.model.DetailsResponseBody;
 import com.netimur.effectivemobiletesttask.databinding.FragmentProductDetailsBinding;
 import com.netimur.effectivemobiletesttask.ui.productdetails.productphoto.ProductPhotoCarouselAdapter;
@@ -30,6 +33,10 @@ final public class ProductDetailsFragment extends Fragment implements ProductDet
         View view = binding.getRoot();
         presenter = new ProductDetailsPresenterImplementation(this);
         presenter.requestProductDetails();
+        hideBottomNavigationBar();
+        binding.favoriteButton.setOnClickListener(new StateSavedOnClickListener());
+        configColorRecyclerView();
+        configCapacityRecyclerView();
         return view;
     }
 
@@ -46,13 +53,40 @@ final public class ProductDetailsFragment extends Fragment implements ProductDet
         binding.processorDescription.setText(detailsResponseBody.getCpu());
         ColorRecyclerViewAdapter colorRecyclerViewAdapter = new ColorRecyclerViewAdapter(this.getContext());
         colorRecyclerViewAdapter.setColors(detailsResponseBody.getColors());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
-        binding.colorRecyclerview.setLayoutManager(linearLayoutManager);
         binding.colorRecyclerview.setAdapter(colorRecyclerViewAdapter);
         CapacityRecyclerViewAdapter capacityRecyclerViewAdapter = new CapacityRecyclerViewAdapter(this.getContext());
         capacityRecyclerViewAdapter.setCapacities(detailsResponseBody.getCapacity());
-        linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
-        binding.capacityRecyclerview.setLayoutManager(linearLayoutManager);
         binding.capacityRecyclerview.setAdapter(capacityRecyclerViewAdapter);
+    }
+
+    private void hideBottomNavigationBar() {
+        BottomNavigationView navBar = getActivity().findViewById(R.id.bottom_navigation);
+        navBar.setVisibility(View.INVISIBLE);
+    }
+
+    private void configColorRecyclerView() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
+        binding.colorRecyclerview.setLayoutManager(linearLayoutManager);
+    }
+
+    private void configCapacityRecyclerView() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
+        binding.capacityRecyclerview.setLayoutManager(linearLayoutManager);
+    }
+
+    static class StateSavedOnClickListener implements View.OnClickListener {
+        private boolean isSelected = false;
+
+        @Override
+        public void onClick(View v) {
+            FloatingActionButton button = (FloatingActionButton) v;
+            if (isSelected) {
+                button.setImageResource(R.drawable.ic_outline_favorite_border_24);
+                isSelected = false;
+            } else {
+                button.setImageResource(R.drawable.ic_baseline_favorite_24);
+                isSelected = true;
+            }
+        }
     }
 }

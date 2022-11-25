@@ -99,7 +99,7 @@ final public class ColorRecyclerViewAdapter extends RecyclerView.Adapter<ColorRe
         }
 
         public void select() {
-            binding.colorItem.setImageResource(R.drawable.ic_check);
+            binding.colorItem.setImageResource(R.drawable.ic_baseline_check_24);
         }
 
         public void deselect() {

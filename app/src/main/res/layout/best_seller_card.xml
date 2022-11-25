@@ -29,7 +29,7 @@
                 app:fabCustomSize="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_heart_outlined"
+                app:srcCompat="@drawable/ic_outline_favorite_border_24"
                 app:tint="@color/orange_brand" />
 
             <TextView
