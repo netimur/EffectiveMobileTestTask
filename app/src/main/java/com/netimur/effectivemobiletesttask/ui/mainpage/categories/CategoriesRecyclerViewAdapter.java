@@ -15,11 +15,28 @@ import com.netimur.effectivemobiletesttask.databinding.CategoryItemBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<CategoriesRecyclerViewAdapter.CategoryViewHolder> {
+final public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<CategoriesRecyclerViewAdapter.CategoryViewHolder> implements CategoryPublisher {
     private List<Category> categories;
     private final Context context;
     private final ArrayList<CategoryViewHolder> holders = new ArrayList<>();
-    private CategoryViewHolder currentHolder;
+    private CategoryStateObserver currentObserver = null;
+
+    @Override
+    public void subscribe(CategoryStateObserver observer) {
+        subscribeFirstItem(observer);
+        if (currentObserver != observer) {
+            currentObserver.updateState();
+            observer.updateState();
+            currentObserver = observer;
+        }
+    }
+
+    private void subscribeFirstItem(CategoryStateObserver observer) {
+        if (currentObserver == null) {
+            currentObserver = observer;
+            currentObserver.updateState();
+        }
+    }
 
     public CategoriesRecyclerViewAdapter(Context context) {
         this.context = context;
@@ -34,18 +51,9 @@ public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<Categori
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
         Category category = categories.get(position);
-        View.OnClickListener onClickListener = v -> {
-            if (currentHolder != null && currentHolder != holder) {
-                holder.selectHolder();
-                currentHolder.unselectHolder();
-                currentHolder = holder;
-            } else {
-                currentHolder = holder;
-                currentHolder.selectHolder();
-            }
-
-        };
-        holder.bindData(category, onClickListener);
+        subscribeFirstItem(holder);
+        View.OnClickListener listener = v -> subscribe(holder);
+        holder.bindData(category, listener);
         holders.add(holder);
     }
 
@@ -58,9 +66,9 @@ public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<Categori
         this.categories = categories;
     }
 
-    protected final static class CategoryViewHolder extends RecyclerView.ViewHolder {
-        private CategoryItemBinding binding;
-        private Category category;
+    protected final static class CategoryViewHolder extends RecyclerView.ViewHolder implements CategoryStateObserver {
+        private final CategoryItemBinding binding;
+        private boolean isSelected = false;
 
         public CategoryViewHolder(CategoryItemBinding binding) {
             super(binding.getRoot());
@@ -68,22 +76,32 @@ public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<Categori
         }
 
         public void bindData(Category category, View.OnClickListener onClickListener) {
-            this.category = category;
             binding.categoryName.setText(category.getCategoryName());
             binding.categoryIcon.setImageResource(category.getImageResourceId());
             binding.getRoot().setOnClickListener(onClickListener);
         }
 
-        public void selectHolder() {
+        @Override
+        public void updateState() {
+            if (isSelected) {
+                unselectHolder();
+            } else {
+                selectHolder();
+            }
+        }
+
+        private void selectHolder() {
             binding.categoryIcon.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(255, 110, 78)));
             binding.categoryName.setTextColor(Color.rgb(255, 110, 78));
             binding.categoryIcon.setImageTintList(ColorStateList.valueOf(Color.WHITE));
+            isSelected = true;
         }
 
-        public void unselectHolder() {
+        private void unselectHolder() {
             binding.categoryIcon.setBackgroundTintList(ColorStateList.valueOf(Color.WHITE));
             binding.categoryName.setTextColor(Color.rgb(1, 0, 53));
             binding.categoryIcon.setImageTintList(ColorStateList.valueOf(Color.rgb(179, 179, 195)));
+            isSelected = false;
         }
     }
 }

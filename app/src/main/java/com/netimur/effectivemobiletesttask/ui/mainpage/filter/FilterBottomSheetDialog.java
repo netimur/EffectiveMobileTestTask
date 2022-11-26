@@ -1,6 +1,5 @@
 package com.netimur.effectivemobiletesttask.ui.mainpage.filter;
 
-import static com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,14 +10,12 @@ import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.netimur.effectivemobiletesttask.R;
 import com.netimur.effectivemobiletesttask.databinding.FilterBottomSheetDialogBinding;
 
-public class FilterBottomSheetDialog extends BottomSheetDialogFragment {
+final public class FilterBottomSheetDialog extends BottomSheetDialogFragment {
     private FilterBottomSheetDialogBinding binding;
 
     @Nullable

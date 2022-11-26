@@ -30,13 +30,18 @@ final public class ColorRecyclerViewAdapter extends RecyclerView.Adapter<ColorRe
     }
 
     public void subscribe(ColorStateObserver observer) {
-        if (currentColorStateObserver == null) {
-            currentColorStateObserver = observer;
-            currentColorStateObserver.updateState();
-        } else if (observer != currentColorStateObserver) {
+        subscribeFirstItem(observer);
+        if (observer != currentColorStateObserver) {
             observer.updateState();
             currentColorStateObserver.updateState();
             currentColorStateObserver = observer;
+        }
+    }
+
+    private void subscribeFirstItem(ColorStateObserver observer) {
+        if (currentColorStateObserver == null) {
+            currentColorStateObserver = observer;
+            currentColorStateObserver.updateState();
         }
     }
 
@@ -54,6 +59,7 @@ final public class ColorRecyclerViewAdapter extends RecyclerView.Adapter<ColorRe
     public ColorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         ColorViewHolder viewHolder = new ColorViewHolder(ColorItemBinding.inflate(inflater, parent, false));
+        subscribeFirstItem(viewHolder);
         View.OnClickListener listener = v -> subscribe(viewHolder);
         viewHolder.setOnClickListener(listener);
         return viewHolder;
@@ -91,19 +97,19 @@ final public class ColorRecyclerViewAdapter extends RecyclerView.Adapter<ColorRe
         public void updateState() {
             if (isSelected) {
                 deselect();
-                isSelected = false;
             } else {
                 select();
-                isSelected = true;
             }
         }
 
         public void select() {
             binding.colorItem.setImageResource(R.drawable.ic_baseline_check_24);
+            isSelected = true;
         }
 
         public void deselect() {
             binding.colorItem.setImageDrawable(null);
+            isSelected = false;
         }
 
         @Override

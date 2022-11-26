@@ -1,6 +1,7 @@
 package com.netimur.effectivemobiletesttask.ui.mainpage.bestseller;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,25 +60,34 @@ final public class BestSellerRecyclerviewAdapter extends RecyclerView.Adapter<Be
         public void bindData(BestSeller bestSeller) {
             ImageView imageView = binding.cardImage;
             Picasso.get().load(bestSeller.getPictureUrl()).into(imageView);
-            binding.currentPrice.setText(context.getString(R.string.dollar) + String.valueOf(bestSeller.getDiscountPrice()));
-            binding.oldPrice.setText(String.valueOf(bestSeller.getPriceWithoutDiscount()));
+            binding.currentPrice.setText("$" + String.valueOf(bestSeller.getDiscountPrice()));
+            CharSequence oldPrice = Html.fromHtml("<s>" + "$" + String.valueOf(bestSeller.getPriceWithoutDiscount()) + "</s>");
+            binding.oldPrice.setText(oldPrice);
             binding.productName.setText(bestSeller.getTitle());
             if (bestSeller.isFavorites()) {
                 binding.isFavoriteTag.setImageResource(R.drawable.ic_baseline_favorite_24);
             }
             isFavoriteButtonSelected = bestSeller.isFavorites();
-            binding.isFavoriteTag.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (!isFavoriteButtonSelected) {
-                        isFavoriteButtonSelected = true;
-                        binding.isFavoriteTag.setImageResource(R.drawable.ic_baseline_favorite_24);
-                    } else {
-                        isFavoriteButtonSelected = false;
-                        binding.isFavoriteTag.setImageResource(R.drawable.ic_outline_favorite_border_24);
-                    }
-                }
-            });
+            binding.isFavoriteTag.setOnClickListener(v -> updateState());
         }
+
+        private void updateState() {
+            if (isFavoriteButtonSelected) {
+                deselectFavourite();
+            } else {
+                selectFavourite();
+            }
+        }
+
+        private void selectFavourite() {
+            isFavoriteButtonSelected = true;
+            binding.isFavoriteTag.setImageResource(R.drawable.ic_baseline_favorite_24);
+        }
+
+        private void deselectFavourite() {
+            isFavoriteButtonSelected = false;
+            binding.isFavoriteTag.setImageResource(R.drawable.ic_outline_favorite_border_24);
+        }
+
     }
 }

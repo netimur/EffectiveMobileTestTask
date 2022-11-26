@@ -27,11 +27,22 @@ final public class CapacityRecyclerViewAdapter extends RecyclerView.Adapter<Capa
         this.capacities = capacities;
     }
 
+    @Override
+    public void subscribe(CapacityStateObserver observer) {
+        subscribeFirstItem(observer);
+        if (currentObserver != observer) {
+            currentObserver.updateState();
+            observer.updateState();
+            currentObserver = observer;
+        }
+    }
+
     @NonNull
     @Override
     public CapacityViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         CapacityViewHolder holder = new CapacityViewHolder(CapacityItemBinding.inflate(inflater, parent, false));
+        subscribeFirstItem(holder);
         View.OnClickListener listener = v -> subscribe(holder);
         holder.setOnClickListener(listener);
         return holder;
@@ -48,15 +59,10 @@ final public class CapacityRecyclerViewAdapter extends RecyclerView.Adapter<Capa
         return capacities.size();
     }
 
-    @Override
-    public void subscribe(CapacityStateObserver observer) {
+    private void subscribeFirstItem(CapacityStateObserver observer) {
         if (currentObserver == null) {
             currentObserver = observer;
             currentObserver.updateState();
-        } else if (currentObserver != observer) {
-            currentObserver.updateState();
-            observer.updateState();
-            currentObserver = observer;
         }
     }
 
@@ -81,10 +87,8 @@ final public class CapacityRecyclerViewAdapter extends RecyclerView.Adapter<Capa
         public void updateState() {
             if (isSelected) {
                 deselect();
-                isSelected = false;
             } else {
                 select();
-                isSelected = true;
             }
         }
 
@@ -92,12 +96,14 @@ final public class CapacityRecyclerViewAdapter extends RecyclerView.Adapter<Capa
             binding.capacityButton.setBackgroundColor(Color.parseColor("#FF6E4E"));
             binding.capacityButton.setTextColor(Color.WHITE);
             binding.capacityButton.setElevation(0);
+            isSelected = true;
         }
 
         private void deselect() {
             binding.capacityButton.setBackgroundColor(Color.WHITE);
             binding.capacityButton.setTextColor(Color.parseColor("#8D8D8D"));
             binding.capacityButton.setElevation(0);
+            isSelected = false;
         }
 
         @Override

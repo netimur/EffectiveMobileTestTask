@@ -2,10 +2,9 @@ package com.netimur.effectivemobiletesttask.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class MyCart {
+final public class MyCart {
     @SerializedName("basket")
     private final List<CartItem> cartItems;
     private final String delivery;

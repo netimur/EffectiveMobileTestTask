@@ -1,6 +1,6 @@
 package com.netimur.effectivemobiletesttask.data.model;
 
-public class CartItem {
+final public class CartItem {
     private final int id;
     private final String images;
     private final int price;

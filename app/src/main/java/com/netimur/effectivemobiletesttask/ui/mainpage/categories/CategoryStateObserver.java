@@ -1,5 +1,5 @@
 package com.netimur.effectivemobiletesttask.ui.mainpage.categories;
 
-public interface CategoryState {
-    void applyState();
+public interface CategoryStateObserver {
+    void updateState();
 }

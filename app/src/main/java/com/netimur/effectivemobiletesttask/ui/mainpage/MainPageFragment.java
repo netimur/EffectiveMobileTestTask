@@ -1,24 +1,17 @@
 package com.netimur.effectivemobiletesttask.ui.mainpage;
 
-import android.content.Context;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.netimur.effectivemobiletesttask.R;
 import com.netimur.effectivemobiletesttask.data.CategoryRepository;
 import com.netimur.effectivemobiletesttask.databinding.FragmentMainPageBinding;
@@ -32,7 +25,6 @@ import com.netimur.effectivemobiletesttask.data.model.BestSeller;
 import com.netimur.effectivemobiletesttask.data.model.HotSales;
 
 import java.util.List;
-import java.util.Objects;
 
 final public class MainPageFragment extends Fragment implements MainPageView {
     private FragmentMainPageBinding binding;
@@ -44,18 +36,8 @@ final public class MainPageFragment extends Fragment implements MainPageView {
         View view = binding.getRoot();
         MainPagePresenter mainPagePresenter = new MainPagePresenterImplementation(this);
         mainPagePresenter.requestMainPageData();
-        configBestSellerRecyclerView();
-        configCategoriesRecyclerView();
+        configUiElements();
         showCategories(null);
-        binding.filterButton.setOnClickListener(v -> {
-            FilterBottomSheetDialog filter = new FilterBottomSheetDialog();
-            filter.show(getParentFragmentManager(), "TAG");
-        });
-        MainActivity activity = (MainActivity) this.getActivity();
-        assert activity != null;
-        if (activity.isBottomNavigationInitialized()) {
-            showBottomNavigationBar();
-        }
         return view;
     }
 
@@ -82,6 +64,13 @@ final public class MainPageFragment extends Fragment implements MainPageView {
         binding.bestSellersRecyclerview.setAdapter(adapter);
     }
 
+    private void configUiElements() {
+        configBestSellerRecyclerView();
+        configCategoriesRecyclerView();
+        configFilter();
+        showBottomNavigationBar();
+    }
+
     private void configBestSellerRecyclerView() {
         GridLayoutManager manager = new GridLayoutManager(this.getContext(), 2, LinearLayoutManager.VERTICAL, false);
         binding.bestSellersRecyclerview.setLayoutManager(manager);
@@ -92,8 +81,19 @@ final public class MainPageFragment extends Fragment implements MainPageView {
         binding.categoryRecyclerview.setLayoutManager(manager);
     }
 
+    private void configFilter() {
+        binding.filterButton.setOnClickListener(v -> {
+            FilterBottomSheetDialog filter = new FilterBottomSheetDialog();
+            filter.show(getParentFragmentManager(), "TAG");
+        });
+    }
+
     private void showBottomNavigationBar() {
-        BottomNavigationView navBar = requireActivity().findViewById(R.id.bottom_navigation);
-        navBar.setVisibility(View.VISIBLE);
+        MainActivity activity = (MainActivity) this.getActivity();
+        assert activity != null;
+        if (activity.isBottomNavigationInitialized()) {
+            BottomNavigationView navBar = requireActivity().findViewById(R.id.bottom_navigation);
+            navBar.setVisibility(View.VISIBLE);
+        }
     }
 }

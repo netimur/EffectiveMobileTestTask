@@ -1,6 +1,6 @@
 package com.netimur.effectivemobiletesttask.ui.mainpage.categories;
 
-public class Category {
+final public class Category {
     private final int imageResourceId;
     private final String categoryName;
 
