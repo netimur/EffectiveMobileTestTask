@@ -3,9 +3,15 @@ package com.netimur.effectivemobiletesttask.data.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
+@Entity(tableName = "hot_sales")
 final public class HotSales implements Parcelable {
+    @PrimaryKey
     private final int id;
     @SerializedName("is_new")
     private final boolean isNew;

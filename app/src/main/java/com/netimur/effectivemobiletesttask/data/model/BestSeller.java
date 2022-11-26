@@ -1,9 +1,14 @@
 package com.netimur.effectivemobiletesttask.data.model;
 
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
+@Entity(tableName = "best_sellers")
 final public class BestSeller  {
+    @PrimaryKey
     private final int id;
     @SerializedName("is_favorites")
     private final boolean isFavorites;
